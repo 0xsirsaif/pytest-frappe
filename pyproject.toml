@@ -1,0 +1,59 @@
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+addopts = "--ignore=test_build.py"
+
+[build-system]
+# Minimum requirements for the build system to execute.
+requires = ["flit_core >=3.2,<4"]
+# identifies the entry point to the build backend object, using the dotted path as a string.
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "pytest_frappe"
+
+[tool.flit.sdist]
+exclude = ["tests/"]
+
+# project’s core metadata
+[project]
+name = "pytest-frappe"
+authors = [
+    { name = "0xsirsaif", email = "sirsaif99@gmail.com" }
+]
+description = "Pytest Frappe Plugin - A set of pytest fixtures to test Frappe applications"
+readme = "README.md"
+# This clearly delineates which metadata is purposefully unspecified and expected to stay unspecified
+# compared to being provided via tooling later on.
+dynamic = ["version"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Internet :: WWW/HTTP :: Session",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "pytest>=7.0.0",
+    "frappe>=0.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "flake8",
+    "pytest",
+    "isort",
+    "black",
+    "mypy",
+    "flit",
+]
+
+[project.urls]
+Documentation = "https://github.com/0xsirsaif/pytest-frappe"
