@@ -42,7 +42,6 @@ classifiers = [
 requires-python = ">=3.9"
 dependencies = [
     "pytest>=7.0.0",
-    "frappe>=0.0.1",
 ]
 
 [project.optional-dependencies]
