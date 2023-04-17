@@ -3,9 +3,9 @@ import frappe
 import pytest
 
 
-def get_site_configs():
+def get_site_configs(sites_path_as_str):
     """Returns the sites path and the current site"""
-    sites_path = pathlib.Path(__file__).parent.parent.parent.parent.parent / "sites"
+    sites_path = pathlib.Path(sites_path_as_str)
     current_site = sites_path / "currentsite.txt"
     with open(current_site, "r") as f:
         current_site = f.readline().strip()
@@ -13,9 +13,10 @@ def get_site_configs():
 
 
 @pytest.fixture(scope='session')
-def db_instance():
+def db_instance(request):
     """Returns a database instance."""
-    sites_path, current_site = get_site_configs()
+    sites_path, current_site = get_site_configs(request.config.getoption("--sites-path"))
+
     frappe.init(site=current_site, sites_path=sites_path)
     frappe.connect()
 
