@@ -3,16 +3,6 @@ import frappe
 import pytest
 
 
-def pytest_addoption(parser):
-    parser.addoption(
-        "--sites-path",
-        action="store",
-        dest="sites_path",
-        default="config",
-        help="Frappe config file",
-    )
-
-
 def get_site_configs(sites_path):
     """Returns the sites path and the current site"""
     sites_path = pathlib.Path(sites_path)

@@ -56,3 +56,6 @@ dev = [
 
 [project.urls]
 Documentation = "https://github.com/0xsirsaif/pytest-frappe"
+
+[project.entry-points.pytest11]
+pytest_frappe = "pytest_frappe"
