@@ -1,2 +1,8 @@
 def pytest_addoption(parser):
-    parser.addoption('--sites-path', action='store', dest='frappe_config',default='config', help='Frappe config file')
+    parser.addoption(
+        "--sites-path",
+        action="store",
+        dest="sites_path",
+        default="config",
+        help="Frappe config file",
+    )
