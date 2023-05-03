@@ -13,6 +13,6 @@ def pytest_addoption(parser):
         "--site",
         action="store",
         dest="site",
-        default="site1.local",
+        default=None,
         help="Frappe site",
     )
