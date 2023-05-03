@@ -9,3 +9,10 @@ def pytest_addoption(parser):
         default="config",
         help="Frappe config file",
     )
+    parser.addoption(
+        "--site",
+        action="store",
+        dest="site",
+        default="site1.local",
+        help="Frappe site",
+    )
