@@ -1,6 +1,3 @@
-from pytest_frappe.fixtures import db_instance, db_transaction
-
-
 def pytest_addoption(parser):
     parser.addoption(
         "--sites-path",

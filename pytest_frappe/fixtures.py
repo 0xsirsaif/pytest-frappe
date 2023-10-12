@@ -29,10 +29,6 @@ def db_instance(request):
     frappe.init(site=current_site, sites_path=sites_path)
     frappe.connect()
 
-    # TODO: should we mock the commit method?
-    # mock_commit = MagicMock()
-    # frappe.db.commit = mock_commit
-
     yield frappe.db
     frappe.destroy()
 
