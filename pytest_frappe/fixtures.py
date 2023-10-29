@@ -31,7 +31,7 @@ def is_testing_allowed(test_site: str) -> bool:
 
 
 @pytest.fixture(scope="session")
-def db_instance(request: pytest.FixtureRequest) -> frappe.database.Database:
+def db_instance(request: pytest.FixtureRequest):
     sites_path = request.config.getoption("--sites-path")
     site_config_path = pathlib.Path(sites_path)
 
@@ -54,7 +54,7 @@ def db_instance(request: pytest.FixtureRequest) -> frappe.database.Database:
 
 
 @pytest.fixture()
-def db_transaction(db_instance: frappe.database.Database) -> frappe.database.Database:
+def db_transaction(db_instance):
     # create a new transaction.
     db_instance.begin()
     yield db_instance
