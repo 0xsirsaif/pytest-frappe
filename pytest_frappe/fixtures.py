@@ -4,9 +4,15 @@ import pytest
 
 
 def get_current_site(site_config_path: pathlib.Path) -> str:
-    current_site_file: pathlib.Path = site_config_path / "currentsite.txt"
-    with open(current_site_file, "r") as f:
-        return f.readline().strip()
+    current_site = frappe.local.site or None
+    if not current_site:
+        current_site_file: pathlib.Path = site_config_path / "currentsite.txt"
+        try:
+            with open(current_site_file, "r") as f:
+                current_site = f.readline().strip()
+        except FileNotFoundError:
+            current_site = None
+    return current_site
 
 
 def select_test_site(request: pytest.FixtureRequest) -> str:
