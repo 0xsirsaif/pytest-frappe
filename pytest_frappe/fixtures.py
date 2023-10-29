@@ -37,8 +37,14 @@ def select_test_site(request: pytest.FixtureRequest) -> str:
 
 def is_testing_allowed(test_site: str) -> bool:
     site_config: dict = frappe.get_conf(site=test_site)
-    allow_tests: str = site_config.get("allow_tests", "0")
-    return allow_tests and allow_tests.lower() not in ["0", "false", "no"]
+    allow_tests: str | bool = site_config.get("allow_tests", None)
+
+    if allow_tests is None:
+        raise Exception("Testing is not allowed for the selected test site")
+    elif isinstance(allow_tests, bool):
+        return allow_tests
+    elif isinstance(allow_tests, str):
+        return allow_tests.lower() in ["true", "1", "yes", "y"]
 
 
 @pytest.fixture(scope="session")
