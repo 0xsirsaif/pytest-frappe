@@ -3,8 +3,14 @@ import frappe
 import pytest
 
 
-def get_current_site(site_config_path: pathlib.Path) -> str:
-    current_site = frappe.local.site or None
+def get_current_site(site_config_path: pathlib.Path, test_site=None) -> str:
+    # Check if frappe.local.site is available
+    if hasattr(frappe.local, 'site'):
+        current_site = frappe.local.site
+    else:
+        current_site = None
+
+    # Check if current_site is available in currentsite.txt
     if not current_site:
         current_site_file: pathlib.Path = site_config_path / "currentsite.txt"
         try:
@@ -12,6 +18,11 @@ def get_current_site(site_config_path: pathlib.Path) -> str:
                 current_site = f.readline().strip()
         except FileNotFoundError:
             current_site = None
+
+    # If test_site is provided, use it as the current site
+    if not current_site and test_site:
+        current_site = test_site
+
     return current_site
 
 
