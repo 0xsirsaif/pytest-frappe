@@ -7,9 +7,9 @@ def pytest_addoption(parser):
         help="Frappe config file",
     )
     parser.addoption(
-        "--site",
+        "--test-site",
         action="store",
-        dest="site",
+        dest="test_site",
         default=None,
-        help="Frappe site",
+        help="Specify the test site for running tests",
     )
