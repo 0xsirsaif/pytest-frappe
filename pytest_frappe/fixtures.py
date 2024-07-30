@@ -70,7 +70,7 @@ def db_instance(request: pytest.FixtureRequest):
     frappe.destroy()
 
 
-@pytest.fixture()
+@pytest.fixture(autouse=True)
 def db_transaction(db_instance):
     # create a new transaction.
     db_instance.begin()
